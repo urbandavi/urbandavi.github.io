@@ -6,7 +6,29 @@ const diakok = [
   { nev: "Horváth Lilla", osztaly: "10.B", atlag: 4.9 }
 ];
 
-loadTable()
+
+
+
+
+function getDataFromForm(){
+    let name = document.getElementById("form-name")
+    let schoolClass = document.getElementById("form-class")
+    let avr = document.getElementById("form-avr")
+
+    diakok.push(
+        {
+            nev : name.value,
+            osztaly:schoolClass.value,
+            atlag :avr.value
+        }
+    )
+    loadTable()
+}
+
+
+
+
+
 
 function loadTable(){
     const template = document.getElementById("diakok-template")

@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="tablak" id="tabla1">
-        <form action="">
+        <div id="main-form">
             <p>Név</p><br>
-            <input type="text"><br>
+            <input type="text" id="form-name"><br>
             <p>Osztály</p><br>
-            <input type="text"><br>
+            <input id="form-class" type="text"><br>
             <p>Tanulmányi átlag</p><br>
-            <input type="number"><br>
+            <input id="form-avr" type="number"><br>
             <br>
-            <button>Bevitel</button>
-        </form>
+            <button onclick="getDataFromForm()">Bevitel</button>
+        </div>
 
         <h1>Statisztikák</h1>
-        <p>Tanulók száma:</p> 
+        <p>Tanulók száma:</p>
         <p id="stTanulokSzama"></p> <br>
-        <p>Osztályátlag:</p> 
+        <p>Osztályátlag:</p>
         <p id="stOsztalyAtlag"></p><br>
-        <p>Legjobb tanuló:</p> 
+        <p>Legjobb tanuló:</p>
         <p id="stLegjobbTanulo"></p><br>
         <h3>Jegystatisztika</h3>
-        <p>Jeles:</p> 
+        <p>Jeles:</p>
         <p id="stJeles"></p><br>
-        <p>Jó:</p> 
+        <p>Jó:</p>
         <p id="stJo"></p><br>
-        <p>Közepes:</p> 
+        <p>Közepes:</p>
         <p id="stKozepes"></p><br>
-        <p>Elégséges:</p> 
+        <p>Elégséges:</p>
         <p id="stElegseges"></p><br>
-        <p>Elégtelen:</p> 
+        <p>Elégtelen:</p>
         <p id="stElegtelen"></p>
     </div>
 
@@ -49,16 +51,37 @@
 
 
 
-<!--Bal és Jobb oldal/------------------------------------------------------------------------------/-->
+    <!--Bal és Jobb oldal/------------------------------------------------------------------------------/-->
 
 
 
     <div class="tablak" id="tabla2">
         <input type="text" id="searchBar">
+        <template id="diakok-template">
+            <tr>
+                <td id="nev"></td>
+                <td id="osztaly"></td>
+                <td id="atlag"></td>
+                <td>
+                    <button id="modify">Módosítás</button>
+                    <button id="delet">Törlés</button>
+                </td>
+            </tr>
+        </template>
 
+
+        <table id="table-body">
+            <tr>
+                <td>Név</td>
+                <td>Osztály</td>
+                <td>Átlag</td>
+                <td>Műveletek</td>
+            </tr>
+        </table>
     </div>
-    
 
-    
+
+    <script src="diakadat.js"></script>
 </body>
+
 </html>
