@@ -31,10 +31,12 @@ function getDataFromForm(){
 
 
 function loadTable(){
+    
     const template = document.getElementById("diakok-template")
-    console.log(template)
     const tbody = document.getElementById("table-body")
-    console.log(tbody)
+    let templateContent = template.content
+    templateContent.getElementByClass("template-rows")
+    console.log(templateContent.getElementByClass("template-rows"))
     diakok.forEach(diak => {
         const row = template.content.cloneNode(true)
         
