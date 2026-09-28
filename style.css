@@ -1,0 +1,50 @@
+body{
+    background-color: bisque;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 30% 65%
+}
+
+.tablak{
+    background-color: bisque;
+    height: 130svh;
+    margin-top: 30px;
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+    padding: 10px;
+    font-size: x-large;
+
+}
+
+
+
+p{
+    display: inline;
+}
+
+button{
+    width: 100px;
+    height: 40px;
+    margin-top: 10px;
+}
+form{
+    background-color:burlywood;
+    padding: 10px;
+}
+
+#searchBar{
+    width: 90%;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+@media (max-width: 1000px) {
+    body{
+        grid-template-columns: auto
+    }
+    .tablak{
+        height: 1000px;
+    }
+}
