@@ -34,7 +34,11 @@ function loadTable(){
     
     const template = document.getElementById("diakok-template")
     const tbody = document.getElementById("table-body")
+    let rows = tbody.getElementsByClassName("template-rows")
+    removeElements(rows.length, rows)
     
+    
+
     diakok.forEach(diak => {
         const row = template.content.cloneNode(true)
         
@@ -45,4 +49,10 @@ function loadTable(){
         tbody.appendChild(row)
     });
    
+}
+
+function removeElements(rowsCount, rows) {
+    for (let index = 0; index < rowsCount; index++) { 
+        rows[0].remove()
+    }
 }
