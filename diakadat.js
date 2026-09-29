@@ -34,16 +34,15 @@ function loadTable(){
     
     const template = document.getElementById("diakok-template")
     const tbody = document.getElementById("table-body")
-    let templateContent = template.content
-    templateContent.getElementByClass("template-rows")
-    console.log(templateContent.getElementByClass("template-rows"))
+    
     diakok.forEach(diak => {
         const row = template.content.cloneNode(true)
         
         row.getElementById("nev").textContent  = diak.nev
         row.getElementById("osztaly").textContent  = diak.osztaly
         row.getElementById("atlag").textContent  = diak.atlag
-
+        
         tbody.appendChild(row)
     });
+   
 }
