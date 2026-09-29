@@ -18,14 +18,25 @@
             <p>Tanulmányi átlag</p><br>
             <input id="form-avr" type="number"><br>
             <br>
-            <button  onclick="getDataFromForm()">Bevitel</button>
+            <button  onclick="clickStatisticsChange()">Bevitel</button>
         </div>
 
         <h1>Statisztikák</h1>
         <p>Tanulók száma:</p>
         <p id="stTanulokSzama"></p> <br>
+
         <p>Osztályátlag:</p>
+        <select id="osztalySelectId">
+  <option value="10A">10A</option>
+  <option value="10B">10B</option>
+  <option value="10C">10C</option>
+</select>
         <p id="stOsztalyAtlag"></p><br>
+
+
+
+
+
         <p>Legjobb tanuló:</p>
         <p id="stLegjobbTanulo"></p><br>
         <h3>Jegystatisztika</h3>
@@ -81,7 +92,7 @@
     </div>
 
 
-    <script src="diakadat.js"></script>
+    <script src="domi.js"></script>
 </body>
 
 </html>
