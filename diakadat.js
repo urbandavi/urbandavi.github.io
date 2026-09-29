@@ -38,17 +38,18 @@ function loadTable(){
     let rows = tbody.getElementsByClassName("template-rows")
     removeElements(rows.length, rows)
     
-    
-
-    diakok.forEach(diak => {
+    for (let index = 0; index < diakok.length; index++) {
         const row = template.content.cloneNode(true)
         
-        row.getElementById("nev").textContent  = diak.nev
-        row.getElementById("osztaly").textContent  = diak.osztaly
-        row.getElementById("atlag").textContent  = diak.atlag
+        row.getElementById("nev").textContent  = diakok[index].nev
+        row.getElementById("osztaly").textContent  = diakok[index].osztaly
+        row.getElementById("atlag").textContent  = diakok[index].atlag
         
         tbody.appendChild(row)
-    });
+        
+    }    
+
+   
    
 }
 
@@ -57,6 +58,14 @@ function removeElements(rowsCount, rows) {
         rows[0].remove()
     }
 }
+
+
+
+
+
+
+
+
 
 
 
