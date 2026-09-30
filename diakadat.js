@@ -26,7 +26,7 @@ try{
     if(String(nameV) == "" || String(schoolClassV) == "" || String(avrV) == ""){
         throw new Error ("Hiányzó adatok.")
     }
-    if(String(schoolClassV) != "10.A" && String(schoolClassV) != "10.B" && String(schoolClassV) != "10.C"){
+    if(String(schoolClassV) != "10.A" || String(schoolClassV) != "10.B" || String(schoolClassV) != "10.C"){
         throw new Error("Hibás osztály, választható osztályok: 10.A, 10.B, 10.C")
     }
     if(avrV < 1 || avrV > 5){
