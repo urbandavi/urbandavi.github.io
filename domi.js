@@ -1,9 +1,9 @@
 const diakok = [
-  { nev: "Kovács Anna", osztaly: "10.A", atlag: 4.6 },
-  { nev: "Nagy Bence", osztaly: "11.B", atlag: 3.8 },
-  { nev: "Tóth Eszter", osztaly: "9.C", atlag: 4.2 },
-  { nev: "Szabó Márk", osztaly: "12.A", atlag: 3.5 },
-  { nev: "Horváth Lilla", osztaly: "10.B", atlag: 4.9 }
+  { nev: "Kovács Anna", osztaly: "10.A", atlag: 5 },
+  { nev: "Nagy Bence", osztaly: "10.B", atlag: 1 },
+  { nev: "Tóth Eszter", osztaly: "10.C", atlag: 4.2 },
+  { nev: "Szabó Márk", osztaly: "10.A", atlag: 2 },
+  { nev: "Horváth Lilla", osztaly: "10.B", atlag: 1 }
 ];
 
 
@@ -13,16 +13,28 @@ function clickStatisticsChange(){ //bekötni törlés gombra is a statisztikát
     document.getElementById("stTanulokSzama").textContent = tanulokSzama
 
     //-------------------------------
-    let valasztottOsztaly = document.getElementById("osztalySelectId").value //hiba, osztályselector
+    //let valasztottOsztaly = document.getElementById("osztalySelectId").value //hiba, osztályselector
+    //let valasztottOsztaly = document.querySelector('#osztalySelectId');
+    let select = document.getElementById('osztalySelectId');
+    let valasztottOsztaly = select.options[select.selectedIndex].value;
+
+    console.log("VOSZTALY")
     console.log(valasztottOsztaly)
+    console.log("VOSZTALY")
+
     let osztalyAtlag
     let atlagOsszegSzamitas =0
+    let osztalyDiakokSzama = 0;
 
     for (let i = 0; i < diakok.length; i++) {
-        atlagOsszegSzamitas += diakok[i].atlag
+        if(String(diakok[i].osztaly) == String(valasztottOsztaly)){
+            console.log("TesztSiker")
+            atlagOsszegSzamitas += diakok[i].atlag
+            osztalyDiakokSzama+=1
+        }
     }
-    osztalyAtlag = atlagOsszegSzamitas/tanulokSzama
-    osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
+    osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama
+    osztalyAtlag = Number(Math.round(osztalyAtlag * 100) / 100)
     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
 
     //-------------------------------
