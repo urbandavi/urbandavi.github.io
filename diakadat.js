@@ -113,16 +113,44 @@ function clickStatisticsChange(){ //bekötni törlés gombra is a statisztikát
     document.getElementById("stTanulokSzama").textContent = tanulokSzama
 
     //-------------------------------
-    let osztalyAtlag
+   /* let osztalyAtlag
     let atlagOsszegSzamitas =0
 
     for (let i = 0; i < diakok.length; i++) {
+        if()
         atlagOsszegSzamitas += diakok[i].atlag
     }
     osztalyAtlag = atlagOsszegSzamitas/tanulokSzama
     osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
+*/
+ let select = document.getElementById('osztalySelectId');
+    let valasztottOsztaly = select.options[select.selectedIndex].value;
 
+    /*console.log("VOSZTALY")
+    console.log(valasztottOsztaly)
+    console.log("VOSZTALY")*/
+
+    let osztalyAtlag = 0
+    let atlagOsszegSzamitas =0
+    let osztalyDiakokSzama = 0
+
+    for (let i = 0; i < diakok.length; i++) {
+        if(String(diakok[i].osztaly) == String(valasztottOsztaly)){
+            console.log("TesztSiker")
+            atlagOsszegSzamitas += diakok[i].atlag
+            osztalyDiakokSzama+=1
+        }
+    }
+    console.log("Átlagtesztelés")
+    console.log("Átlagösszegszámítás")
+    console.log(atlagOsszegSzamitas)
+    console.log("osztálydiákokszáma")
+    console.log(osztalyDiakokSzama) //Itt javítani az átlagszámításon
+    console.log()
+    osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama
+    osztalyAtlag = Number(Math.round(osztalyAtlag * 100) / 100)
+    document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
     //-------------------------------
 
     let legjobbDiakList=[]
@@ -177,3 +205,11 @@ function clickStatisticsChange(){ //bekötni törlés gombra is a statisztikát
 
 
 }
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  clickStatisticsChange()
+});
