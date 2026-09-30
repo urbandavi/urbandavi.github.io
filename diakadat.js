@@ -11,9 +11,25 @@ const diakok = [
 
 
 function getDataFromForm(){
+    let avr = 0
     let name = document.getElementById("form-name")
     let schoolClass = document.getElementById("form-class")
-    let avr = document.getElementById("form-avr")
+    avr = document.getElementById("form-avr")
+
+
+try{
+
+    if(String(name) == "" || String(schoolClass) == "" || String(avr) == ""){
+        throw new Error ("Hiányzó adatok.")
+    }
+    if(String(schoolClass) != "10.A" && String(schoolClass) != "10.B" && String(schoolClass) != "10.C"){
+        throw new Error ("Hibás osztály, választható osztályok: 10.A, 10.B, 10.C")
+    }
+    if(avr < 1 || avr > 5){
+        throw new Error ("Hibás osztályzat lett megadva.")
+    }
+
+
 
     diakok.push(
         {
@@ -24,6 +40,13 @@ function getDataFromForm(){
     )
     loadTable()
     clickStatisticsChange()
+}
+catch(error){
+    document.getElementById('errorP').innerHTML = error
+}
+    
+
+
 }
 
 
