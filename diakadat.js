@@ -19,13 +19,17 @@ function getDataFromForm(){
 
 try{
 
-    if(String(name) == "" || String(schoolClass) == "" || String(avr) == ""){
+    let nameV = name.value
+    let schoolClassV = schoolClass.value
+    let avrV = avr.value
+
+    if(String(nameV) == "" || String(schoolClassV) == "" || String(avrV) == ""){
         throw new Error ("Hiányzó adatok.")
     }
-    if(String(schoolClass) != "10.A" && String(schoolClass) != "10.B" && String(schoolClass) != "10.C"){
-        throw new Error ("Hibás osztály, választható osztályok: 10.A, 10.B, 10.C")
+    if(String(schoolClassV) != "10.A" && String(schoolClassV) != "10.B" && String(schoolClassV) != "10.C"){
+        throw new Error("Hibás osztály, választható osztályok: 10.A, 10.B, 10.C")
     }
-    if(avr < 1 || avr > 5){
+    if(avrV < 1 || avrV > 5){
         throw new Error ("Hibás osztályzat lett megadva.")
     }
 
@@ -69,11 +73,11 @@ function loadTable(){
         row.getElementById("atlag").textContent  = diakok[index].atlag
         
         
-        const actionBtn = row.getElementById("action-buttons")
-        console.log(actionBtn)
-        let del = actionBtn.querySelector("#delet")
-        console.log(del)
-        del.addEventListener("click" ,deleteStudent(index))
+        //const actionBtn = row.getElementById("action-buttons")
+        //console.log(actionBtn)
+        //let del = actionBtn.querySelector(".delet")
+        //console.log(del)
+        //del.addEventListener("click" ,deleteStudent(index))
         tbody.appendChild(row)
         
     }    
@@ -82,7 +86,7 @@ function loadTable(){
 }
 function deleteStudent(index) {
     diakok.splice(index, 1)
-    loadTable()
+    loadTable() 
 }
 
 
