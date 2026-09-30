@@ -18,7 +18,7 @@
             <p>Tanulmányi átlag</p><br>
             <input id="form-avr" type="number"><br>
             <br>
-            <button  onclick="clickStatisticsChange()">Bevitel</button>
+            <button  onclick="getDataFromForm()">Bevitel</button>
         </div>
 
         <h1>Statisztikák</h1>
@@ -73,7 +73,7 @@
                 <td id="nev"></td>
                 <td id="osztaly"></td>
                 <td id="atlag"></td>
-                <td>
+                <td id="action-buttons">
                     <button id="modify">Módosítás</button>
                     <button id="delet">Törlés</button>
                 </td>
@@ -92,7 +92,7 @@
     </div>
 
 
-    <script src="domi.js"></script>
+    <script src="diakadat.js"></script>
 </body>
 
 </html>

@@ -1,8 +1,8 @@
 const diakok = [
   { nev: "Kovács Anna", osztaly: "10.A", atlag: 4.6 },
-  { nev: "Nagy Bence", osztaly: "11.B", atlag: 3.8 },
-  { nev: "Tóth Eszter", osztaly: "9.C", atlag: 4.2 },
-  { nev: "Szabó Márk", osztaly: "12.A", atlag: 3.5 },
+  { nev: "Nagy Bence", osztaly: "10.B", atlag: 3.8 },
+  { nev: "Tóth Eszter", osztaly: "10.C", atlag: 4.2 },
+  { nev: "Szabó Márk", osztaly: "10.A", atlag: 3.5 },
   { nev: "Horváth Lilla", osztaly: "10.B", atlag: 4.9 }
 ];
 
@@ -45,13 +45,23 @@ function loadTable(){
         row.getElementById("osztaly").textContent  = diakok[index].osztaly
         row.getElementById("atlag").textContent  = diakok[index].atlag
         
+        
+        const actionBtn = row.getElementById("action-buttons")
+        console.log(actionBtn)
+        let del = actionBtn.querySelector("#delet")
+        console.log(del)
+        del.addEventListener("click" ,deleteStudent(index))
         tbody.appendChild(row)
         
     }    
 
    
-   
 }
+function deleteStudent(index) {
+    diakok.splice(index, 1)
+    loadTable()
+}
+
 
 function removeElements(rowsCount, rows) {
     for (let index = 0; index < rowsCount; index++) { 
