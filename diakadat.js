@@ -10,6 +10,7 @@ const diakok = [
 
 
 
+
 function getDataFromForm(){
     let avr = 0
     let name = document.getElementById("form-name")
@@ -22,11 +23,12 @@ try{
     let nameV = name.value
     let schoolClassV = schoolClass.value
     let avrV = avr.value
-
+    let catchRegExp = /^(?:[1-9]|1[0-3])\.[A-Za-z]$/
     if(String(nameV) == "" || String(schoolClassV) == "" || String(avrV) == ""){
         throw new Error ("Hiányzó adatok.")
     }
-    if(String(schoolClassV) != "10.A" || String(schoolClassV) != "10.B" || String(schoolClassV) != "10.C"){
+    if(!catchRegExp.test(String(schoolClassV))){
+    //if(String(schoolClassV) != "10.A" || String(schoolClassV) != "10.B" || String(schoolClassV) != "10.C"){
         throw new Error("Hibás osztály, választható osztályok: 10.A, 10.B, 10.C")
     }
     if(avrV < 1 || avrV > 5){
@@ -73,11 +75,12 @@ function loadTable(){
         row.getElementById("atlag").textContent  = diakok[index].atlag
         
         
-        //const actionBtn = row.getElementById("action-buttons")
-        //console.log(actionBtn)
-        //let del = actionBtn.querySelector(".delet")
-        //console.log(del)
-        //del.addEventListener("click" ,deleteStudent(index))
+        const actionBtn = row.getElementById("action-buttons")
+        actionBtn.dataset.index = index
+        console.log(actionBtn.dataset.index)
+        let del = actionBtn.querySelector(".delet")
+        console.log(del)
+        del.addEventListener("click" ,deleteStudent(index))
         tbody.appendChild(row)
         
     }    
