@@ -83,7 +83,9 @@ function loadTable() {
         mod.addEventListener("click", () => {
             studentName.value = diakok[index].nev
             schoolClass.value = diakok[index].nev
-            studentName.value = diakok[index].nev
+            avr.value = diakok[index].avr
+
+            
         })
         
         tbody.appendChild(row)
