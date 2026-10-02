@@ -1,100 +1,100 @@
 const diakok = [
-  { nev: "Kovács Anna", osztaly: "10.A", atlag: 4.6 },
-  { nev: "Nagy Bence", osztaly: "10.B", atlag: 3.8 },
-  { nev: "Tóth Eszter", osztaly: "10.C", atlag: 4.2 },
-  { nev: "Szabó Márk", osztaly: "10.A", atlag: 3.5 },
-  { nev: "Horváth Lilla", osztaly: "10.B", atlag: 4.9 }
+    { nev: "Kovács Anna", osztaly: "10.A", atlag: 4.6 },
+    { nev: "Nagy Bence", osztaly: "10.B", atlag: 3.8 },
+    { nev: "Tóth Eszter", osztaly: "10.C", atlag: 4.2 },
+    { nev: "Szabó Márk", osztaly: "10.A", atlag: 3.5 },
+    { nev: "Horváth Lilla", osztaly: "10.B", atlag: 4.9 }
 ];
 
+document.addEventListener("DOMContentLoaded", loadTable())
+
+const studentName = document.getElementById("form-name")
+const schoolClass = document.getElementById("form-class")
+const avr = document.getElementById("form-avr")
 
 
+function getDataFromForm() {
 
+    try {
 
-
-function getDataFromForm(){
-    let avr = 0
-    let name = document.getElementById("form-name")
-    let schoolClass = document.getElementById("form-class")
-    avr = document.getElementById("form-avr")
-
-
-try{
-
-    let nameV = name.value
-    let schoolClassV = schoolClass.value
-    let avrV = avr.value
-    let catchRegExp = /^(?:[1-9]|1[0-3])\.[A-Za-z]$/
-    if(String(nameV) == "" || String(schoolClassV) == "" || String(avrV) == ""){
-        throw new Error ("Hiányzó adatok.")
-    }
-    if(!catchRegExp.test(String(schoolClassV))){
-    //if(String(schoolClassV) != "10.A" || String(schoolClassV) != "10.B" || String(schoolClassV) != "10.C"){
-        throw new Error("Hibás osztály, választható osztályok: 10.A, 10.B, 10.C")
-    }
-    if(avrV < 1 || avrV > 5){
-        throw new Error ("Hibás osztályzat lett megadva.")
-    }
-
-
-
-    diakok.push(
-        {
-            nev : name.value,
-            osztaly:schoolClass.value,
-            atlag :avr.value
+        let nameV = studentName.value
+        let schoolClassV = schoolClass.value
+        let avrV = avr.value
+        let catchRegExp = /^(?:[1-9]|1[0-3])\.[A-Za-z]$/
+        if (String(nameV) == "" || String(schoolClassV) == "" || String(avrV) == "") {
+            throw new Error("Hiányzó adatok.")
         }
-    )
-    loadTable()
-    clickStatisticsChange()
+        if (!catchRegExp.test(String(schoolClassV))) {
+            //if(String(schoolClassV) != "10.A" || String(schoolClassV) != "10.B" || String(schoolClassV) != "10.C"){
+            throw new Error("Hibás osztály, választható osztályok: 10.A, 10.B, 10.C")
+        }
+        if (avrV < 1 || avrV > 5) {
+            throw new Error("Hibás osztályzat lett megadva.")
+        }
+
+
+
+        diakok.push(
+            {
+                nev: studentName.value,
+                osztaly: schoolClass.value,
+                atlag: avr.value
+            }
+        )
+        loadTable()
+        clickStatisticsChange()
+    }
+    catch (error) {
+        document.getElementById('errorP').innerHTML = error
+    }
+
+
+
 }
-catch(error){
-    document.getElementById('errorP').innerHTML = error
-}
-    
-
-
-}
 
 
 
 
 
 
-function loadTable(){
-    
+function loadTable() {
+
     const template = document.getElementById("diakok-template")
     const tbody = document.getElementById("table-body")
     let rows = tbody.getElementsByClassName("template-rows")
     removeElements(rows.length, rows)
-    
+
     for (let index = 0; index < diakok.length; index++) {
         const row = template.content.cloneNode(true)
-        
-        row.getElementById("nev").textContent  = diakok[index].nev
-        row.getElementById("osztaly").textContent  = diakok[index].osztaly
-        row.getElementById("atlag").textContent  = diakok[index].atlag
-        
-        
         const actionBtn = row.getElementById("action-buttons")
-        actionBtn.dataset.index = index
-        console.log(actionBtn.dataset.index)
-        let del = actionBtn.querySelector(".delet")
-        console.log(del)
-        del.addEventListener("click" ,deleteStudent(index))
-        tbody.appendChild(row)
+        const del = actionBtn.querySelector(".delet")
+        const mod = actionBtn.querySelector(".modify")
         
-    }    
+        row.getElementById("nev").textContent = diakok[index].nev
+        row.getElementById("osztaly").textContent = diakok[index].osztaly
+        row.getElementById("atlag").textContent = diakok[index].atlag
 
-   
+
+        actionBtn.dataset.index = index
+        del.addEventListener("click", () => {
+            diakok.splice(index, 1)
+            loadTable()
+        })
+        mod.addEventListener("click", () => {
+           
+        })
+        
+        tbody.appendChild(row)
+
+    }
+
+
 }
-function deleteStudent(index) {
-    diakok.splice(index, 1)
-    loadTable() 
-}
+
 
 
 function removeElements(rowsCount, rows) {
-    for (let index = 0; index < rowsCount; index++) { 
+    for (let index = 0; index < rowsCount; index++) {
         rows[0].remove()
     }
 }
@@ -110,24 +110,24 @@ function removeElements(rowsCount, rows) {
 
 
 
-function clickStatisticsChange(){ //bekötni törlés gombra is a statisztikát
+function clickStatisticsChange() { //bekötni törlés gombra is a statisztikát
     let tanulokSzama = diakok.length
     console.log(tanulokSzama)
     document.getElementById("stTanulokSzama").textContent = tanulokSzama
 
     //-------------------------------
-   /* let osztalyAtlag
-    let atlagOsszegSzamitas =0
-
-    for (let i = 0; i < diakok.length; i++) {
-        if()
-        atlagOsszegSzamitas += diakok[i].atlag
-    }
-    osztalyAtlag = atlagOsszegSzamitas/tanulokSzama
-    osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
-    document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
-*/
- let select = document.getElementById('osztalySelectId');
+    /* let osztalyAtlag
+     let atlagOsszegSzamitas =0
+ 
+     for (let i = 0; i < diakok.length; i++) {
+         if()
+         atlagOsszegSzamitas += diakok[i].atlag
+     }
+     osztalyAtlag = atlagOsszegSzamitas/tanulokSzama
+     osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
+     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
+ */
+    let select = document.getElementById('osztalySelectId');
     let valasztottOsztaly = select.options[select.selectedIndex].value;
 
     /*console.log("VOSZTALY")
@@ -135,14 +135,14 @@ function clickStatisticsChange(){ //bekötni törlés gombra is a statisztikát
     console.log("VOSZTALY")*/
 
     let osztalyAtlag = 0
-    let atlagOsszegSzamitas =0
+    let atlagOsszegSzamitas = 0
     let osztalyDiakokSzama = 0
 
     for (let i = 0; i < diakok.length; i++) {
-        if(String(diakok[i].osztaly) == String(valasztottOsztaly)){
+        if (String(diakok[i].osztaly) == String(valasztottOsztaly)) {
             console.log("TesztSiker")
             atlagOsszegSzamitas += diakok[i].atlag
-            osztalyDiakokSzama+=1
+            osztalyDiakokSzama += 1
         }
     }
     console.log("Átlagtesztelés")
@@ -151,21 +151,21 @@ function clickStatisticsChange(){ //bekötni törlés gombra is a statisztikát
     console.log("osztálydiákokszáma")
     console.log(osztalyDiakokSzama) //Itt javítani az átlagszámításon
     console.log()
-    osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama
+    osztalyAtlag = atlagOsszegSzamitas / osztalyDiakokSzama
     osztalyAtlag = Number(Math.round(osztalyAtlag * 100) / 100)
     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
     //-------------------------------
 
-    let legjobbDiakList=[]
+    let legjobbDiakList = []
     let legjobbDiakJegy = 0;
-    for (let i = 0; i < diakok.length; i++){
-        if(diakok[i].atlag>legjobbDiakJegy){
-            legjobbDiakJegy=diakok[i].atlag
+    for (let i = 0; i < diakok.length; i++) {
+        if (diakok[i].atlag > legjobbDiakJegy) {
+            legjobbDiakJegy = diakok[i].atlag
         }
     }
 
-    for (let i = 0; i < diakok.length; i++){
-        if(diakok[i].atlag==legjobbDiakJegy){
+    for (let i = 0; i < diakok.length; i++) {
+        if (diakok[i].atlag == legjobbDiakJegy) {
             legjobbDiakList.push(diakok[i].nev)
         }
     }
@@ -180,21 +180,21 @@ function clickStatisticsChange(){ //bekötni törlés gombra is a statisztikát
     let elegsegesNum = 0
     let elegtelenNum = 0
 
-    for (let i = 0; i < diakok.length; i++){
-        if(diakok[i].atlag >=4.5){
-            jelesNum+=1
+    for (let i = 0; i < diakok.length; i++) {
+        if (diakok[i].atlag >= 4.5) {
+            jelesNum += 1
         }
-        if(diakok[i].atlag >= 3.5 && diakok[i].atlag <= 4.49){
-            joNum+=1
+        if (diakok[i].atlag >= 3.5 && diakok[i].atlag <= 4.49) {
+            joNum += 1
         }
-        if(diakok[i].atlag >= 2.5 && diakok[i].atlag <= 3.49){
-            kozepesNum+=1
+        if (diakok[i].atlag >= 2.5 && diakok[i].atlag <= 3.49) {
+            kozepesNum += 1
         }
-        if(diakok[i].atlag >= 2 && diakok[i].atlag <= 2.49){
-            elegsegesNum+=1
+        if (diakok[i].atlag >= 2 && diakok[i].atlag <= 2.49) {
+            elegsegesNum += 1
         }
-        if(diakok[i].atlag < 2){
-            elegtelenNum+=1
+        if (diakok[i].atlag < 2) {
+            elegtelenNum += 1
         }
     }
 
@@ -213,6 +213,6 @@ function clickStatisticsChange(){ //bekötni törlés gombra is a statisztikát
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-  clickStatisticsChange()
+document.addEventListener("DOMContentLoaded", function () {
+    clickStatisticsChange()
 });
