@@ -38,7 +38,7 @@ function getDataFromForm() {
             {
                 nev: studentName.value,
                 osztaly: schoolClass.value,
-                atlag: avr.value
+                atlag: Number(avr.value)
             }
         )
         loadTable()
@@ -81,7 +81,9 @@ function loadTable() {
             loadTable()
         })
         mod.addEventListener("click", () => {
-           
+            studentName.value = diakok[index].nev
+            schoolClass.value = diakok[index].nev
+            studentName.value = diakok[index].nev
         })
         
         tbody.appendChild(row)
