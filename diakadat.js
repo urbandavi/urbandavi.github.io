@@ -162,7 +162,7 @@ let valasztottOsztaly = select.options[select.selectedIndex].value;
     console.log()*/
     console.log("Nulla-e?")
     console.log(osztalyDiakokSzama)
-    osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama
+    osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama  //NE LEGYEN NULLÁVAL OSZTHATÓ!!!!!!!!!!!!!!!!
     osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
     osztalyAtlag = Number(osztalyAtlag)
     /*console.log("VOSZTALYATLAG")
