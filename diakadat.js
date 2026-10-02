@@ -128,31 +128,47 @@ function clickStatisticsChange(){ //bekötni törlés gombra is a statisztikát
     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
 */
  let select = document.getElementById('osztalySelectId');
-    let valasztottOsztaly = select.options[select.selectedIndex].value;
+let valasztottOsztaly = select.options[select.selectedIndex].value;
 
-    /*console.log("VOSZTALY")
+    console.log("VOSZTALY")
     console.log(valasztottOsztaly)
-    console.log("VOSZTALY")*/
+    console.log("VOSZTALY")
 
     let osztalyAtlag = 0
     let atlagOsszegSzamitas =0
     let osztalyDiakokSzama = 0
 
+
+
+    console.log("Ciklus előtti teszt:")
+        console.log(diakok)
+
+    console.log("Választott osztály:")
+    console.log(valasztottOsztaly)
     for (let i = 0; i < diakok.length; i++) {
+        console.log("egy cikluskör")
+        console.log(diakok[i].osztaly)
         if(String(diakok[i].osztaly) == String(valasztottOsztaly)){
             console.log("TesztSiker")
             atlagOsszegSzamitas += diakok[i].atlag
             osztalyDiakokSzama+=1
         }
     }
-    console.log("Átlagtesztelés")
+   /* console.log("Átlagtesztelés")
     console.log("Átlagösszegszámítás")
     console.log(atlagOsszegSzamitas)
     console.log("osztálydiákokszáma")
     console.log(osztalyDiakokSzama) //Itt javítani az átlagszámításon
-    console.log()
+    console.log()*/
+    console.log("Nulla-e?")
+    console.log(osztalyDiakokSzama)
     osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama
-    osztalyAtlag = Number(Math.round(osztalyAtlag * 100) / 100)
+    osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
+    osztalyAtlag = Number(osztalyAtlag)
+    /*console.log("VOSZTALYATLAG")
+    console.log(osztalyAtlag)
+    console.log(typeof osztalyAtlag)
+    console.log("VOSZTALYATLAG")*/
     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
     //-------------------------------
 
