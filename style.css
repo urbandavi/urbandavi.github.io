@@ -32,6 +32,9 @@ button{
     height: 40px;
     margin-top: 10px;
 }
+#kitunoKapcsoloGomb{
+    width: 250px;
+}
 #main-form{
     background-color:burlywood;
     padding: 10px;
