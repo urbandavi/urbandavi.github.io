@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", loadTable())
 const inputButton = document.getElementById("inputBtn")
 inputButton.dataset.currentIndex = -1
 inputButton.addEventListener("click", () => {
-    
+
     getDataFromForm()
 
 })
