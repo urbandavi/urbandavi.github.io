@@ -6,6 +6,19 @@ const diakok = [
     { nev: "Horváth Lilla", osztaly: "10.B", atlag: 4.9 }
 ];
 
+let kitunoKapcsolo = false
+function ktKapcsolo(){
+    if(kitunoKapcsolo == false){
+        kitunoKapcsolo = true
+        document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#ff0000";
+    }
+    else{
+        kitunoKapcsolo = false
+        document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#eeeeee";
+    }
+    loadTable()
+}
+
 document.addEventListener("DOMContentLoaded", loadTable())
 const inputButton = document.getElementById("inputBtn")
 inputButton.addEventListener("click", () => {
@@ -77,10 +90,11 @@ function loadTable() {
         const del = actionBtn.querySelector(".delet")
         const mod = actionBtn.querySelector(".modify")
 
+
         row.getElementById("nev").textContent = diakok[index].nev
         row.getElementById("osztaly").textContent = diakok[index].osztaly
         row.getElementById("atlag").textContent = diakok[index].atlag
-
+        
 
         actionBtn.dataset.index = index
         del.addEventListener("click", () => {
@@ -109,6 +123,79 @@ function loadTable() {
 
 
 }
+
+
+
+function loadTableSecondary() {
+
+    const template = document.getElementById("diakok-template")
+    const tbody = document.getElementById("table-body")
+    let rows = tbody.getElementsByClassName("template-rows")
+
+    removeElements(rows.length, rows)
+
+    for (let index = 0; index < diakok.length; index++) {
+        const row = template.content.cloneNode(true)
+        const actionBtn = row.getElementById("action-buttons")
+        const del = actionBtn.querySelector(".delet")
+        const mod = actionBtn.querySelector(".modify")
+
+        if(kitunoKapcsolo == true){
+            if(diakok[index].atlag>=4.5){
+
+        row.getElementById("nev").textContent = diakok[index].nev
+        row.getElementById("osztaly").textContent = diakok[index].osztaly
+        row.getElementById("atlag").textContent = diakok[index].atlag
+            }
+        
+        }
+        else{
+row.getElementById("nev").textContent = diakok[index].nev
+        row.getElementById("osztaly").textContent = diakok[index].osztaly
+        row.getElementById("atlag").textContent = diakok[index].atlag
+        }
+
+        actionBtn.dataset.index = index
+        del.addEventListener("click", () => {
+            diakok.splice(index, 1)
+            loadTable()
+        })
+        mod.addEventListener("click", () => {
+            studentName.value = diakok[index].nev
+            schoolClass.value = diakok[index].osztaly
+            avr.value = diakok[index].atlag
+            inputButton.dataset.currentIndex = index
+            inputButton.addEventListener("click", () => {
+                diakok[index] = {
+                    nev: studentName.value,
+                    osztaly: schoolClass.value,
+                    atlag: Number(avr.value)
+                }
+                loadTable()
+            })
+
+        })
+
+        tbody.appendChild(row)
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
