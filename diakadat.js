@@ -7,12 +7,12 @@ const diakok = [
 ];
 
 let kitunoKapcsolo = false
-function ktKapcsolo(){
-    if(kitunoKapcsolo == false){
+function ktKapcsolo() {
+    if (kitunoKapcsolo == false) {
         kitunoKapcsolo = true
         document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#ff0000";
     }
-    else{
+    else {
         kitunoKapcsolo = false
         document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#eeeeee";
     }
@@ -21,10 +21,17 @@ function ktKapcsolo(){
 
 document.addEventListener("DOMContentLoaded", loadTable())
 const inputButton = document.getElementById("inputBtn")
+
 inputButton.addEventListener("click", () => {
     getDataFromForm()
     inputButton.dataset.currentIndex = -1
 })
+const searchBar = document.getElementById("searchBar")
+searchBar.addEventListener("change", ()=> {
+    loadTable()
+})
+
+
 
 
 const studentName = document.getElementById("form-name")
@@ -40,7 +47,7 @@ function getDataFromForm() {
         let schoolClassV = schoolClass.value
         let avrV = avr.value
         let catchRegExp = /^(?:[1-9]|1[0-3])\.[A-Za-z]$/
-        if (String(nameV) == "" || String(schoolClassV) == "" || String(avrV) == "") {
+        if (String(nameV) === "" || String(schoolClassV) === "" || String(avrV) === "") {
             throw new Error("Hiányzó adatok.")
         }
         if (!catchRegExp.test(String(schoolClassV))) {
@@ -147,19 +154,19 @@ function loadTableSecondary() {
         const del = actionBtn.querySelector(".delet")
         const mod = actionBtn.querySelector(".modify")
 
-        if(kitunoKapcsolo == true){
-            if(diakok[index].atlag>=4.5){
+        if (kitunoKapcsolo == true) {
+            if (diakok[index].atlag >= 4.5) {
 
-        row.getElementById("nev").textContent = diakok[index].nev
-        row.getElementById("osztaly").textContent = diakok[index].osztaly
-        row.getElementById("atlag").textContent = diakok[index].atlag
+                row.getElementById("nev").textContent = diakok[index].nev
+                row.getElementById("osztaly").textContent = diakok[index].osztaly
+                row.getElementById("atlag").textContent = diakok[index].atlag
             }
-        
+
         }
-        else{
-row.getElementById("nev").textContent = diakok[index].nev
-        row.getElementById("osztaly").textContent = diakok[index].osztaly
-        row.getElementById("atlag").textContent = diakok[index].atlag
+        else {
+            row.getElementById("nev").textContent = diakok[index].nev
+            row.getElementById("osztaly").textContent = diakok[index].osztaly
+            row.getElementById("atlag").textContent = diakok[index].atlag
         }
 
         actionBtn.dataset.index = index
@@ -229,19 +236,19 @@ function clickStatisticsChange() { //bekötni törlés gombra is a statisztikát
     document.getElementById("stTanulokSzama").textContent = tanulokSzama
 
     //-------------------------------
-   /* let osztalyAtlag
-    let atlagOsszegSzamitas =0
-
-    for (let i = 0; i < diakok.length; i++) {
-        if()
-        atlagOsszegSzamitas += diakok[i].atlag
-    }
-    osztalyAtlag = atlagOsszegSzamitas/tanulokSzama
-    osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
-    document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
-*/
- let select = document.getElementById('osztalySelectId');
-let valasztottOsztaly = document.getElementById('stOsztalyInput').value
+    /* let osztalyAtlag
+     let atlagOsszegSzamitas =0
+ 
+     for (let i = 0; i < diakok.length; i++) {
+         if()
+         atlagOsszegSzamitas += diakok[i].atlag
+     }
+     osztalyAtlag = atlagOsszegSzamitas/tanulokSzama
+     osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
+     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
+ */
+    let select = document.getElementById('osztalySelectId');
+    let valasztottOsztaly = document.getElementById('stOsztalyInput').value
 
     console.log("VOSZTALY")
     console.log(valasztottOsztaly)
@@ -262,33 +269,33 @@ let valasztottOsztaly = document.getElementById('stOsztalyInput').value
     for (let i = 0; i < diakok.length; i++) {
         console.log("egy cikluskör")
         console.log(diakok[i].osztaly)
-        if(String(diakok[i].osztaly).toLocaleLowerCase() == String(valasztottOsztaly).toLocaleLowerCase()){
+        if (String(diakok[i].osztaly).toLocaleLowerCase() == String(valasztottOsztaly).toLocaleLowerCase()) {
             console.log("TesztSiker")
             atlagOsszegSzamitas += diakok[i].atlag
             osztalyDiakokSzama += 1
             talaltOsztalyBool = true
         }
     }
-    if(talaltOsztalyBool == false){
+    if (talaltOsztalyBool == false) {
         document.getElementById('stOsztalyAtlag').innerHTML = "Nincs ilyen osztály"
     }
-   /* console.log("Átlagtesztelés")
-    console.log("Átlagösszegszámítás")
-    console.log(atlagOsszegSzamitas)
-    console.log("osztálydiákokszáma")
-    console.log(osztalyDiakokSzama) //Itt javítani az átlagszámításon
-    console.log()*/
+    /* console.log("Átlagtesztelés")
+     console.log("Átlagösszegszámítás")
+     console.log(atlagOsszegSzamitas)
+     console.log("osztálydiákokszáma")
+     console.log(osztalyDiakokSzama) //Itt javítani az átlagszámításon
+     console.log()*/
     console.log("Nulla-e?")
     console.log(osztalyDiakokSzama)
-    if(osztalyDiakokSzama!=0){
-    osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama  
-    osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
-    osztalyAtlag = Number(osztalyAtlag)
-    /*console.log("VOSZTALYATLAG")
-    console.log(osztalyAtlag)
-    console.log(typeof osztalyAtlag)
-    console.log("VOSZTALYATLAG")*/
-    document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
+    if (osztalyDiakokSzama != 0) {
+        osztalyAtlag = atlagOsszegSzamitas / osztalyDiakokSzama
+        osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
+        osztalyAtlag = Number(osztalyAtlag)
+        /*console.log("VOSZTALYATLAG")
+        console.log(osztalyAtlag)
+        console.log(typeof osztalyAtlag)
+        console.log("VOSZTALYATLAG")*/
+        document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
     }
 
     //-------------------------------
