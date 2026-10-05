@@ -7,6 +7,12 @@ const diakok = [
 ];
 
 document.addEventListener("DOMContentLoaded", loadTable())
+const inputButton = document.getElementById("inputBtn")
+inputButton.addEventListener("click", () => {
+    getDataFromForm()
+    inputButton.dataset.currentIndex = -1
+})
+
 
 const studentName = document.getElementById("form-name")
 const schoolClass = document.getElementById("form-class")
@@ -62,6 +68,7 @@ function loadTable() {
     const template = document.getElementById("diakok-template")
     const tbody = document.getElementById("table-body")
     let rows = tbody.getElementsByClassName("template-rows")
+
     removeElements(rows.length, rows)
 
     for (let index = 0; index < diakok.length; index++) {
@@ -69,7 +76,7 @@ function loadTable() {
         const actionBtn = row.getElementById("action-buttons")
         const del = actionBtn.querySelector(".delet")
         const mod = actionBtn.querySelector(".modify")
-        
+
         row.getElementById("nev").textContent = diakok[index].nev
         row.getElementById("osztaly").textContent = diakok[index].osztaly
         row.getElementById("atlag").textContent = diakok[index].atlag
@@ -82,12 +89,20 @@ function loadTable() {
         })
         mod.addEventListener("click", () => {
             studentName.value = diakok[index].nev
-            schoolClass.value = diakok[index].nev
-            avr.value = diakok[index].avr
+            schoolClass.value = diakok[index].osztaly
+            avr.value = diakok[index].atlag
+            inputButton.dataset.currentIndex = index
+            inputButton.addEventListener("click", () => {
+                diakok[index] = {
+                    nev: studentName.value,
+                    osztaly: schoolClass.value,
+                    atlag: Number(avr.value)
+                }
+                loadTable()
+            })
 
-            
         })
-        
+
         tbody.appendChild(row)
 
     }
@@ -120,19 +135,19 @@ function clickStatisticsChange() { //bekötni törlés gombra is a statisztikát
     document.getElementById("stTanulokSzama").textContent = tanulokSzama
 
     //-------------------------------
-   /* let osztalyAtlag
-    let atlagOsszegSzamitas =0
-
-    for (let i = 0; i < diakok.length; i++) {
-        if()
-        atlagOsszegSzamitas += diakok[i].atlag
-    }
-    osztalyAtlag = atlagOsszegSzamitas/tanulokSzama
-    osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
-    document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
-*/
- let select = document.getElementById('osztalySelectId');
-let valasztottOsztaly = select.options[select.selectedIndex].value;
+    /* let osztalyAtlag
+     let atlagOsszegSzamitas =0
+ 
+     for (let i = 0; i < diakok.length; i++) {
+         if()
+         atlagOsszegSzamitas += diakok[i].atlag
+     }
+     osztalyAtlag = atlagOsszegSzamitas/tanulokSzama
+     osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
+     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
+ */
+    let select = document.getElementById('osztalySelectId');
+    let valasztottOsztaly = select.options[select.selectedIndex].value;
 
     console.log("VOSZTALY")
     console.log(valasztottOsztaly)
@@ -145,28 +160,28 @@ let valasztottOsztaly = select.options[select.selectedIndex].value;
 
 
     console.log("Ciklus előtti teszt:")
-        console.log(diakok)
+    console.log(diakok)
 
     console.log("Választott osztály:")
     console.log(valasztottOsztaly)
     for (let i = 0; i < diakok.length; i++) {
         console.log("egy cikluskör")
         console.log(diakok[i].osztaly)
-        if(String(diakok[i].osztaly) == String(valasztottOsztaly)){
+        if (String(diakok[i].osztaly) == String(valasztottOsztaly)) {
             console.log("TesztSiker")
             atlagOsszegSzamitas += diakok[i].atlag
             osztalyDiakokSzama += 1
         }
     }
-   /* console.log("Átlagtesztelés")
-    console.log("Átlagösszegszámítás")
-    console.log(atlagOsszegSzamitas)
-    console.log("osztálydiákokszáma")
-    console.log(osztalyDiakokSzama) //Itt javítani az átlagszámításon
-    console.log()*/
+    /* console.log("Átlagtesztelés")
+     console.log("Átlagösszegszámítás")
+     console.log(atlagOsszegSzamitas)
+     console.log("osztálydiákokszáma")
+     console.log(osztalyDiakokSzama) //Itt javítani az átlagszámításon
+     console.log()*/
     console.log("Nulla-e?")
     console.log(osztalyDiakokSzama)
-    osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama  //NE LEGYEN NULLÁVAL OSZTHATÓ!!!!!!!!!!!!!!!!
+    osztalyAtlag = atlagOsszegSzamitas / osztalyDiakokSzama  //NE LEGYEN NULLÁVAL OSZTHATÓ!!!!!!!!!!!!!!!!
     osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
     osztalyAtlag = Number(osztalyAtlag)
     /*console.log("VOSZTALYATLAG")
