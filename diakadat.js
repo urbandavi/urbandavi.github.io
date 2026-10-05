@@ -132,7 +132,7 @@ function clickStatisticsChange() { //bekötni törlés gombra is a statisztikát
     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
 */
  let select = document.getElementById('osztalySelectId');
-let valasztottOsztaly = select.options[select.selectedIndex].value;
+let valasztottOsztaly = document.getElementById('stOsztalyInput').value
 
     console.log("VOSZTALY")
     console.log(valasztottOsztaly)
@@ -141,6 +141,7 @@ let valasztottOsztaly = select.options[select.selectedIndex].value;
     let osztalyAtlag = 0
     let atlagOsszegSzamitas = 0
     let osztalyDiakokSzama = 0
+    let talaltOsztalyBool = false
 
 
 
@@ -152,11 +153,15 @@ let valasztottOsztaly = select.options[select.selectedIndex].value;
     for (let i = 0; i < diakok.length; i++) {
         console.log("egy cikluskör")
         console.log(diakok[i].osztaly)
-        if(String(diakok[i].osztaly) == String(valasztottOsztaly)){
+        if(String(diakok[i].osztaly).toLocaleLowerCase() == String(valasztottOsztaly).toLocaleLowerCase()){
             console.log("TesztSiker")
             atlagOsszegSzamitas += diakok[i].atlag
             osztalyDiakokSzama += 1
+            talaltOsztalyBool = true
         }
+    }
+    if(talaltOsztalyBool == false){
+        document.getElementById('stOsztalyAtlag').innerHTML = "Nincs ilyen osztály"
     }
    /* console.log("Átlagtesztelés")
     console.log("Átlagösszegszámítás")
@@ -166,7 +171,8 @@ let valasztottOsztaly = select.options[select.selectedIndex].value;
     console.log()*/
     console.log("Nulla-e?")
     console.log(osztalyDiakokSzama)
-    osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama  //NE LEGYEN NULLÁVAL OSZTHATÓ!!!!!!!!!!!!!!!!
+    if(osztalyDiakokSzama!=0){
+    osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama  
     osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
     osztalyAtlag = Number(osztalyAtlag)
     /*console.log("VOSZTALYATLAG")
@@ -174,6 +180,8 @@ let valasztottOsztaly = select.options[select.selectedIndex].value;
     console.log(typeof osztalyAtlag)
     console.log("VOSZTALYATLAG")*/
     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
+    }
+
     //-------------------------------
 
     let legjobbDiakList = []
