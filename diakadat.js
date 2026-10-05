@@ -8,9 +8,11 @@ const diakok = [
 
 document.addEventListener("DOMContentLoaded", loadTable())
 const inputButton = document.getElementById("inputBtn")
+inputButton.dataset.currentIndex = -1
 inputButton.addEventListener("click", () => {
+    
     getDataFromForm()
-    inputButton.dataset.currentIndex = -1
+
 })
 
 
@@ -38,15 +40,27 @@ function getDataFromForm() {
             throw new Error("Hibás osztályzat lett megadva.")
         }
 
-
-
-        diakok.push(
-            {
+        let cIndex = inputButton.dataset.currentIndex
+        if (cIndex == -1) {
+            console.log("Supra")
+            diakok.push(
+                {
+                    nev: studentName.value,
+                    osztaly: schoolClass.value,
+                    atlag: Number(avr.value)
+                }
+            )
+        }
+        else {
+            console.log("Devon")
+            diakok[cIndex] = {
                 nev: studentName.value,
                 osztaly: schoolClass.value,
                 atlag: Number(avr.value)
             }
-        )
+            inputButton.dataset.currentIndex = -1
+        }
+        clearInputFields()
         loadTable()
         clickStatisticsChange()
     }
@@ -58,6 +72,12 @@ function getDataFromForm() {
 
 }
 
+
+function clearInputFields() {
+    studentName.value = ""
+    schoolClass.value = ""
+    avr.value = ""
+}
 
 
 
@@ -81,8 +101,6 @@ function loadTable() {
         row.getElementById("osztaly").textContent = diakok[index].osztaly
         row.getElementById("atlag").textContent = diakok[index].atlag
 
-
-        actionBtn.dataset.index = index
         del.addEventListener("click", () => {
             diakok.splice(index, 1)
             loadTable()
@@ -93,11 +111,7 @@ function loadTable() {
             avr.value = diakok[index].atlag
             inputButton.dataset.currentIndex = index
             inputButton.addEventListener("click", () => {
-                diakok[index] = {
-                    nev: studentName.value,
-                    osztaly: schoolClass.value,
-                    atlag: Number(avr.value)
-                }
+                getDataFromForm()
                 loadTable()
             })
 
@@ -135,19 +149,19 @@ function clickStatisticsChange() { //bekötni törlés gombra is a statisztikát
     document.getElementById("stTanulokSzama").textContent = tanulokSzama
 
     //-------------------------------
-   /* let osztalyAtlag
-    let atlagOsszegSzamitas =0
-
-    for (let i = 0; i < diakok.length; i++) {
-        if()
-        atlagOsszegSzamitas += diakok[i].atlag
-    }
-    osztalyAtlag = atlagOsszegSzamitas/tanulokSzama
-    osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
-    document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
-*/
- let select = document.getElementById('osztalySelectId');
-let valasztottOsztaly = document.getElementById('stOsztalyInput').value
+    /* let osztalyAtlag
+     let atlagOsszegSzamitas =0
+ 
+     for (let i = 0; i < diakok.length; i++) {
+         if()
+         atlagOsszegSzamitas += diakok[i].atlag
+     }
+     osztalyAtlag = atlagOsszegSzamitas/tanulokSzama
+     osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
+     document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
+ */
+    let select = document.getElementById('osztalySelectId');
+    let valasztottOsztaly = document.getElementById('stOsztalyInput').value
 
     console.log("VOSZTALY")
     console.log(valasztottOsztaly)
@@ -168,33 +182,33 @@ let valasztottOsztaly = document.getElementById('stOsztalyInput').value
     for (let i = 0; i < diakok.length; i++) {
         console.log("egy cikluskör")
         console.log(diakok[i].osztaly)
-        if(String(diakok[i].osztaly).toLocaleLowerCase() == String(valasztottOsztaly).toLocaleLowerCase()){
+        if (String(diakok[i].osztaly).toLocaleLowerCase() == String(valasztottOsztaly).toLocaleLowerCase()) {
             console.log("TesztSiker")
             atlagOsszegSzamitas += diakok[i].atlag
             osztalyDiakokSzama += 1
             talaltOsztalyBool = true
         }
     }
-    if(talaltOsztalyBool == false){
+    if (talaltOsztalyBool == false) {
         document.getElementById('stOsztalyAtlag').innerHTML = "Nincs ilyen osztály"
     }
-   /* console.log("Átlagtesztelés")
-    console.log("Átlagösszegszámítás")
-    console.log(atlagOsszegSzamitas)
-    console.log("osztálydiákokszáma")
-    console.log(osztalyDiakokSzama) //Itt javítani az átlagszámításon
-    console.log()*/
+    /* console.log("Átlagtesztelés")
+     console.log("Átlagösszegszámítás")
+     console.log(atlagOsszegSzamitas)
+     console.log("osztálydiákokszáma")
+     console.log(osztalyDiakokSzama) //Itt javítani az átlagszámításon
+     console.log()*/
     console.log("Nulla-e?")
     console.log(osztalyDiakokSzama)
-    if(osztalyDiakokSzama!=0){
-    osztalyAtlag = atlagOsszegSzamitas/osztalyDiakokSzama  
-    osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
-    osztalyAtlag = Number(osztalyAtlag)
-    /*console.log("VOSZTALYATLAG")
-    console.log(osztalyAtlag)
-    console.log(typeof osztalyAtlag)
-    console.log("VOSZTALYATLAG")*/
-    document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
+    if (osztalyDiakokSzama != 0) {
+        osztalyAtlag = atlagOsszegSzamitas / osztalyDiakokSzama
+        osztalyAtlag = Math.round(osztalyAtlag * 100) / 100
+        osztalyAtlag = Number(osztalyAtlag)
+        /*console.log("VOSZTALYATLAG")
+        console.log(osztalyAtlag)
+        console.log(typeof osztalyAtlag)
+        console.log("VOSZTALYATLAG")*/
+        document.getElementById("stOsztalyAtlag").textContent = osztalyAtlag
     }
 
     //-------------------------------
