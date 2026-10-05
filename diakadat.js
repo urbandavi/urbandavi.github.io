@@ -51,15 +51,27 @@ function getDataFromForm() {
             throw new Error("Hibás osztályzat lett megadva.")
         }
 
-
-
-        diakok.push(
-            {
+        let cIndex = inputButton.dataset.currentIndex
+        if (cIndex == -1) {
+            console.log("Supra")
+            diakok.push(
+                {
+                    nev: studentName.value,
+                    osztaly: schoolClass.value,
+                    atlag: Number(avr.value)
+                }
+            )
+        }
+        else {
+            console.log("Devon")
+            diakok[cIndex] = {
                 nev: studentName.value,
                 osztaly: schoolClass.value,
                 atlag: Number(avr.value)
             }
-        )
+            inputButton.dataset.currentIndex = -1
+        }
+        clearInputFields()
         loadTable()
         clickStatisticsChange()
     }
@@ -72,8 +84,11 @@ function getDataFromForm() {
 }
 
 
-
-
+function clearInputFields() {
+    studentName.value = ""
+    schoolClass.value = ""
+    avr.value = ""
+}
 
 
 function loadTable() {
@@ -90,13 +105,10 @@ function loadTable() {
         const del = actionBtn.querySelector(".delet")
         const mod = actionBtn.querySelector(".modify")
 
-
         row.getElementById("nev").textContent = diakok[index].nev
         row.getElementById("osztaly").textContent = diakok[index].osztaly
         row.getElementById("atlag").textContent = diakok[index].atlag
-        
 
-        actionBtn.dataset.index = index
         del.addEventListener("click", () => {
             diakok.splice(index, 1)
             loadTable()
@@ -107,11 +119,7 @@ function loadTable() {
             avr.value = diakok[index].atlag
             inputButton.dataset.currentIndex = index
             inputButton.addEventListener("click", () => {
-                diakok[index] = {
-                    nev: studentName.value,
-                    osztaly: schoolClass.value,
-                    atlag: Number(avr.value)
-                }
+                getDataFromForm()
                 loadTable()
             })
 
@@ -123,7 +131,6 @@ function loadTable() {
 
 
 }
-
 
 
 function loadTableSecondary() {
