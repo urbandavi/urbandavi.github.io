@@ -22,6 +22,9 @@ function ktKapcsolo() {
 
 
 
+const errorP = document.getElementById('errorP')
+
+
 document.addEventListener("DOMContentLoaded", loadTable())
 const inputButton = document.getElementById("inputBtn")
 inputButton.dataset.currentIndex = -1
@@ -109,7 +112,6 @@ function loadTableSearch() {
 const studentName = document.getElementById("form-name")
 const schoolClass = document.getElementById("form-class")
 const avr = document.getElementById("form-avr")
-let errorP = document.getElementById('errorP')
 
 
 
