@@ -11,12 +11,13 @@ function ktKapcsolo() {
     if (kitunoKapcsolo == false) {
         kitunoKapcsolo = true
         document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#ff0000";
+        loadTableSecondary()
     }
     else {
         kitunoKapcsolo = false
         document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#eeeeee";
+        loadTable()
     }
-    loadTableSecondary()
 }
 
 document.addEventListener("DOMContentLoaded", loadTable())
