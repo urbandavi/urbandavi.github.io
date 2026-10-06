@@ -11,12 +11,13 @@ function ktKapcsolo() {
     if (kitunoKapcsolo == false) {
         kitunoKapcsolo = true
         document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#ff0000";
+        loadTableSecondary()
     }
     else {
         kitunoKapcsolo = false
         document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#eeeeee";
+        loadTable()
     }
-    loadTableSecondary()
 }
 
 document.addEventListener("DOMContentLoaded", loadTable())
@@ -130,7 +131,7 @@ function loadTable() {
             avr.value = diakok[index].atlag
             inputButton.dataset.currentIndex = index
             inputButton.addEventListener("click", () => {
-                //getDataFromForm()                           //Ez a sor kikommentelve?
+                getDataFromForm()
                 loadTable()
             })
 
