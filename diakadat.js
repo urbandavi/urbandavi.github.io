@@ -32,8 +32,9 @@ inputButton.addEventListener("click", () => {
     clickStatisticsChange()
 })
 const searchBar = document.getElementById("searchBar")
-searchBar.addEventListener("change", ()=> {
-    loadTable()
+searchBar.addEventListener("input", ()=> {
+    loadTableSearch()
+
 })
 
 function sortByName() {
@@ -49,9 +50,102 @@ function sortByAvr() {
 
 
 
+function loadTableSearch() {
+
+    const template = document.getElementById("diakok-template")
+    const tbody = document.getElementById("table-body")
+    let rows = tbody.getElementsByClassName("template-rows")
+
+    removeElements(rows.length, rows)
+
+    for (let index = 0; index < diakok.length; index++) {
+
+
+        if(diakok[index].nev.includes (document.getElementById("searchBar").value)){
+
+        const row = template.content.cloneNode(true)
+        const actionBtn = row.getElementById("action-buttons")
+        const del = actionBtn.querySelector(".delet")
+        const mod = actionBtn.querySelector(".modify")
+
+        row.getElementById("nev").textContent = diakok[index].nev
+        row.getElementById("osztaly").textContent = diakok[index].osztaly
+        row.getElementById("atlag").textContent = diakok[index].atlag
+
+        del.addEventListener("click", () => {
+            diakok.splice(index, 1)
+            loadTable()
+        })
+        mod.addEventListener("click", () => {
+            studentName.value = diakok[index].nev
+            schoolClass.value = diakok[index].osztaly
+            avr.value = diakok[index].atlag
+            inputButton.dataset.currentIndex = index
+            inputButton.addEventListener("click", () => {
+                getDataFromForm()
+                loadTable()
+            })
+
+        })
+
+        tbody.appendChild(row)
+        }
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const studentName = document.getElementById("form-name")
 const schoolClass = document.getElementById("form-class")
 const avr = document.getElementById("form-avr")
+
+
+
+
+
+
 
 
 function getDataFromForm() {
