@@ -106,41 +106,10 @@ function loadTableSearch() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const studentName = document.getElementById("form-name")
 const schoolClass = document.getElementById("form-class")
 const avr = document.getElementById("form-avr")
-
+let errorP = document.getElementById('errorP')
 
 
 
@@ -198,7 +167,7 @@ function getDataFromForm() {
         clickStatisticsChange()
     }
     catch (error) {
-        document.getElementById('errorP').innerHTML = error
+        errorP.innerHTML = error
     }
 
 
@@ -215,6 +184,7 @@ function clearInputFields() {
 
 function loadTable() {
 
+    errorP.innerHTML = ""
     const template = document.getElementById("diakok-template")
     const tbody = document.getElementById("table-body")
     let rows = tbody.getElementsByClassName("template-rows")
