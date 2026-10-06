@@ -22,10 +22,10 @@ function ktKapcsolo() {
 
 document.addEventListener("DOMContentLoaded", loadTable())
 const inputButton = document.getElementById("inputBtn")
+inputButton.dataset.currentIndex = -1
 
 inputButton.addEventListener("click", () => {
     getDataFromForm()
-    inputButton.dataset.currentIndex = -1
 })
 const searchBar = document.getElementById("searchBar")
 searchBar.addEventListener("input", ()=> {
@@ -159,7 +159,7 @@ function getDataFromForm() {
 
         let cIndex = inputButton.dataset.currentIndex
         if (cIndex == -1) {
-            //console.log("Supra")
+            console.log("Supra")
             diakok.push(
                 {
                     nev: studentName.value,
@@ -169,7 +169,7 @@ function getDataFromForm() {
             )
         }
         else {
-            //console.log("Devon")
+            console.log("Devon")
             diakok[cIndex] = {
                 nev: studentName.value,
                 osztaly: schoolClass.value.toUpperCase(),
@@ -225,7 +225,6 @@ function loadTable() {
             avr.value = diakok[index].atlag
             inputButton.dataset.currentIndex = index
             inputButton.addEventListener("click", () => {
-                getDataFromForm()
                 loadTable()
             })
 
