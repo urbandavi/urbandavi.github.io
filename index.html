@@ -19,11 +19,10 @@
             <input id="form-avr" type="number"><br>
             <p id="errorP"></p>
             <br>
-            <button id="inputBtn" >Bevitel</button>
+            <button id="inputBtn">Bevitel</button>
         </div>
 
         <h1>Statisztikák</h1><br>
-        <button onclick="clickStatisticsChange()">Frissít</button><br>
         <p>Összes tanulók száma:</p>
         <p id="stTanulokSzama"></p> <br>
 
@@ -68,8 +67,10 @@
     <div class="tablak" id="tabla2">
         <input type="text" id="searchBar">
         <button id="kitunoKapcsoloGomb" onclick="ktKapcsolo()">
-    Kitünő diákok
-</button>
+            Kitünő diákok
+        </button>
+        <button onclick="sortByName()">Név alapú szűrés</button>
+        <button onclick="sortByAvr()">Átlag alapú szűrés</button>
         <template id="diakok-template">
             <tr class="template-rows">
                 <td id="nev"></td>

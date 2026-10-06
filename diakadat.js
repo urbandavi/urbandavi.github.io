@@ -20,18 +20,32 @@ function ktKapcsolo() {
     }
 }
 
+
+
 document.addEventListener("DOMContentLoaded", loadTable())
 const inputButton = document.getElementById("inputBtn")
 inputButton.dataset.currentIndex = -1
-
+inputButton.dataset.orderBy = ""
 inputButton.addEventListener("click", () => {
+    
     getDataFromForm()
+    clickStatisticsChange()
 })
 const searchBar = document.getElementById("searchBar")
 searchBar.addEventListener("change", ()=> {
     loadTable()
 })
 
+function sortByName() {
+   
+    diakok.sort((a, b) => a.nev.localeCompare(b.nev));
+    loadTable()
+}
+function sortByAvr() {
+    
+    diakok.sort((a, b) => b.atlag -a.atlag);
+    loadTable()
+}
 
 
 
@@ -85,6 +99,8 @@ function getDataFromForm() {
         }
         clearInputFields()
         loadTable()
+        
+        console.log(inputButton.dataset.orderBy)
         clickStatisticsChange()
     }
     catch (error) {
@@ -123,6 +139,7 @@ function loadTable() {
 
         del.addEventListener("click", () => {
             diakok.splice(index, 1)
+            clickStatisticsChange()
             loadTable()
         })
         mod.addEventListener("click", () => {
@@ -167,6 +184,7 @@ function loadTableSecondary() {
                         actionBtn.dataset.index = index
         del.addEventListener("click", () => {
             diakok.splice(index, 1)
+            clickStatisticsChange()
             loadTable()
         })
         mod.addEventListener("click", () => {
@@ -196,6 +214,7 @@ function loadTableSecondary() {
                     actionBtn.dataset.index = index
         del.addEventListener("click", () => {
             diakok.splice(index, 1)
+            clickStatisticsChange()
             loadTable()
         })
         mod.addEventListener("click", () => {
@@ -223,19 +242,6 @@ function loadTableSecondary() {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
