@@ -6,11 +6,14 @@ const diakok = [
     { nev: "Horváth Lilla", osztaly: "10.B", atlag: 4.9 }
 ];
 
+const searchBar = document.getElementById("searchBar")
 let kitunoKapcsolo = false
 function ktKapcsolo() {
+    searchBar.value = ""
     if (kitunoKapcsolo == false) {
         kitunoKapcsolo = true
         document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#ff0000";
+        
         loadTableSecondary()
     }
     else {
@@ -18,6 +21,12 @@ function ktKapcsolo() {
         document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#eeeeee";
         loadTable()
     }
+}
+
+function visszaKapcs(){
+    kitunoKapcsolo = false
+        document.getElementById("kitunoKapcsoloGomb").style.backgroundColor = "#eeeeee";
+        loadTable()
 }
 
 
@@ -34,7 +43,6 @@ inputButton.addEventListener("click", () => {
     getDataFromForm()
     clickStatisticsChange()
 })
-const searchBar = document.getElementById("searchBar")
 searchBar.addEventListener("input", ()=> {
     loadTableSearch()
 
@@ -43,11 +51,13 @@ searchBar.addEventListener("input", ()=> {
 function sortByName() {
    
     diakok.sort((a, b) => a.nev.localeCompare(b.nev));
+    searchBar.value = ""
     loadTable()
 }
 function sortByAvr() {
     
     diakok.sort((a, b) => b.atlag -a.atlag);
+    searchBar.value = ""
     loadTable()
 }
 
@@ -163,8 +173,13 @@ function getDataFromForm() {
             inputButton.dataset.currentIndex = -1
         }
         clearInputFields()
-        loadTable()
-        
+        if (kitunoKapcsolo == false){
+
+            loadTable()
+        }
+        else{
+            loadTableSecondary()
+        }
         console.log(inputButton.dataset.orderBy)
         clickStatisticsChange()
     }
@@ -207,6 +222,7 @@ function loadTable() {
             diakok.splice(index, 1)
             clickStatisticsChange()
             loadTable()
+            //visszaKapcs() //visszakapcs
         })
         mod.addEventListener("click", () => {
             studentName.value = diakok[index].nev
@@ -251,7 +267,7 @@ function loadTableSecondary() {
         del.addEventListener("click", () => {
             diakok.splice(index, 1)
             clickStatisticsChange()
-            loadTable()
+            loadTableSecondary()
         })
         mod.addEventListener("click", () => {
             studentName.value = diakok[index].nev
@@ -259,12 +275,8 @@ function loadTableSecondary() {
             avr.value = diakok[index].atlag
             inputButton.dataset.currentIndex = index
             inputButton.addEventListener("click", () => {
-                diakok[index] = {
-                    nev: studentName.value,
-                    osztaly: schoolClass.value,
-                    atlag: Number(avr.value)
-                }
-                loadTable()
+                getDataFromForm()
+                
             })
 
         })
@@ -289,12 +301,7 @@ function loadTableSecondary() {
             avr.value = diakok[index].atlag
             inputButton.dataset.currentIndex = index
             inputButton.addEventListener("click", () => {
-                diakok[index] = {
-                    nev: studentName.value,
-                    osztaly: schoolClass.value,
-                    atlag: Number(avr.value)
-                }
-                loadTable()
+                getDataFromForm()
             })
 
         })
