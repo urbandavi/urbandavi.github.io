@@ -43,10 +43,11 @@ inputButton.addEventListener("click", () => {
     getDataFromForm()
     clickStatisticsChange()
 })
-searchBar.addEventListener("input", ()=> {
-    loadTableSearch()
+stOsztalyInput.addEventListener("input", ()=> {
+    clickStatisticsChange()
 
 })
+//EVENTHANDLER
 
 function sortByName() {
    
